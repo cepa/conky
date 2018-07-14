@@ -1,0 +1,91 @@
+total_run_times 0
+out_to_console no
+double_buffer yes
+no_buffers yes
+text_buffer_size 1024
+update_interval 1
+cpu_avg_samples 1
+net_avg_samples 2
+alignment top_left
+minimum_size 300 500
+maximum_width 300
+gap_x 1600
+gap_y 10
+draw_shades no
+draw_outline no
+draw_borders no
+background yes
+own_window yes
+own_window_type override
+own_window_transparent yes
+use_xft yes
+xftalpha .1
+override_utf8_locale yes
+uppercase no
+use_spacer yes
+stippled_borders 1
+default_color FFFFFF
+default_shade_color 333333
+default_outline_color black
+color3 a3ceff
+color2 0066ff
+color1 0066ff
+
+TEXT
+${font Monospace : pixelsize=10}
+
+${color1}System${color3}${alignr}${exec cat /etc/lsb-release | grep "DES" | cut -d "=" -f2 | sed 's/"//g' | sed 's/ /_/g'}
+${color2}${voffset -5}${hr}
+${offset 15}${color1}Uptime    : ${color3}${uptime}
+${offset 15}${color1}Kernel    : ${color2}${sysname} ${kernel}
+${offset 15}${color1}Machine   : ${color2}${nodename} ${machine}
+${offset 15}${loadgraph 15,285 0066ff a3ceff}
+
+${color1}CPU${color3}${alignr}${cpu cpu}%
+${color2}${voffset -5}${hr}
+${offset 15}${color1}CPU 1 : ${freq 1} MHz - ${color3}${cpu cpu1}% ${color1}${cpubar cpu1}
+${offset 15}${cpugraph cpu1 15,285 0066ff a3ceff}
+${offset 15}${color1}CPU 2 : ${freq 2} MHz - ${color3}${cpu cpu2}% ${color1}${cpubar cpu2}
+${offset 15}${cpugraph cpu2 15,285 0066ff a3ceff}
+${offset 15}${color1}CPU 3 : ${freq 3} MHz - ${color3}${cpu cpu3}% ${color1}${cpubar cpu3}
+${offset 15}${cpugraph cpu3 15,285 0066ff a3ceff}
+${offset 15}${color1}CPU 4 : ${freq 4} MHz - ${color3}${cpu cpu4}% ${color1}${cpubar cpu4}
+${offset 15}${cpugraph cpu4 15,285 0066ff a3ceff}
+${offset 15}${color1}CPU 5 : ${freq 5} MHz - ${color3}${cpu cpu5}% ${color1}${cpubar cpu5}
+${offset 15}${cpugraph cpu5 15,285 0066ff a3ceff}
+${offset 15}${color1}CPU 6 : ${freq 6} MHz - ${color3}${cpu cpu6}% ${color1}${cpubar cpu6}
+${offset 15}${cpugraph cpu6 15,285 0066ff a3ceff}
+${offset 15}${color1}CPU 7 : ${freq 7} MHz - ${color3}${cpu cpu7}% ${color1}${cpubar cpu7}
+${offset 15}${cpugraph cpu7 15,285 0066ff a3ceff}
+${offset 15}${color1}CPU 8 : ${freq 8} MHz - ${color3}${cpu cpu8}% ${color1}${cpubar cpu8}
+${offset 15}${cpugraph cpu8 15,285 0066ff a3ceff}
+
+${color1}Temperatures
+${color2}${voffset -5}${hr}
+${offset 15}${color1}Core 1     : ${color2}${exec cat /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input | cut -c-2 } °C
+${offset 15}${color1}Core 2     : ${color2}${exec cat /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp2_input | cut -c-2 } °C
+${offset 15}${color1}Core 3     : ${color2}${exec cat /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp3_input | cut -c-2 } °C
+${offset 15}${color1}Core 4     : ${color2}${exec cat /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp4_input | cut -c-2 } °C
+
+${color1}Memory
+${color2}${voffset -5}${hr}
+${offset 15}${color1}RAM  : $mem / $memmax -  ${color3}$memperc% ${color1}${membar}
+${offset 15}${color1}SWAP : $swap / $swapmax -  ${color3}$swapperc% ${color1}${swapbar}
+
+${color1}Disk
+${color2}${voffset -5}${hr}
+${offset 15}${color1}/dev/sda activity (mount /)
+${offset 30}Read : ${color2}${diskio_read sda}${goto 172}${color1}Write : ${color2}${diskio_write sda}
+${offset 30}${color1}${diskiograph_read sda 15,130 0066ff a3ceff}${alignr}${diskiograph_write sda 15,130 0066ff a3ceff}
+${offset 15}${color1}/dev/sdb activity (mount /data)
+${offset 30}Read : ${color2}${diskio_read sdb}${goto 172}${color1}Write : ${color2}${diskio_write sdb}
+${offset 30}${color1}${diskiograph_read sdb 15,130 0066ff a3ceff}${alignr}${diskiograph_write sdb 15,130 0066ff a3ceff}
+
+${color1}File System
+${color2}${voffset -5}${hr}
+${offset 15}${color1}/     : ${color3}${fs_free /} ${color1}of ${fs_size /} -  ${color3}${fs_used_perc /}% ${color1}${fs_bar /}
+${offset 15}${color1}/data : ${color3}${fs_free /data} ${color1}of ${fs_size /data} -  ${color3}${fs_used_perc /data}% ${color1}${fs_bar /data}
+
+${color1}Battery${color3}${alignr}${battery}
+${color2}${voffset -5}${hr}
+${offset 15}${color1}Time : ${battery_time} - ${color3}${battery_percent}% ${color1}${battery_bar}

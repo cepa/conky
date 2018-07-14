@@ -1,0 +1,91 @@
+total_run_times 0
+out_to_console no
+double_buffer yes
+no_buffers yes
+text_buffer_size 1024
+update_interval 1
+cpu_avg_samples 1
+net_avg_samples 2
+alignment top_left
+minimum_size 300 500
+maximum_width 300
+gap_x 1200
+gap_y 10
+draw_shades no
+draw_outline no
+draw_borders no
+background yes
+own_window yes
+own_window_type override
+own_window_transparent yes
+use_xft yes
+xftalpha .1
+override_utf8_locale yes
+uppercase no
+use_spacer yes
+stippled_borders 1
+default_color FFFFFF
+default_shade_color 333333
+default_outline_color black
+color3 a3ceff
+color2 0066ff
+color1 0066ff
+
+TEXT
+${font Monospace : pixelsize=10}
+
+${color1}Time
+${color2}${voffset -5}${hr}
+${offset 15}${color1}Time : ${color3}${time %H : %M : %S}
+${offset 15}${color1}Date : ${time %A %d %B %Y}
+${offset 15}Week : ${color2}${time %V} ${color1}out of 53
+
+${color1}Top CPU
+${color2}${voffset -5}${hr}
+${offset 15}${color2}${top name 1}${color3}${goto 150}${top cpu 1}%${alignr}${color1}${top pid 1}
+${offset 15}${color2}${top name 2}${color3}${goto 150}${top cpu 2}%${alignr}${color1}${top pid 2}
+${offset 15}${color2}${top name 3}${color3}${goto 150}${top cpu 3}%${alignr}${color1}${top pid 3}
+${offset 15}${color2}${top name 4}${color3}${goto 150}${top cpu 4}%${alignr}${color1}${top pid 4}
+${offset 15}${color2}${top name 5}${color3}${goto 150}${top cpu 5}%${alignr}${color1}${top pid 5}
+
+${color1}Top RAM
+${color2}${voffset -5}${hr}
+${offset 15}${color2}${top_mem name 1}${color3}${goto 150}${top_mem mem 1}%${alignr}${color1}${top_mem pid 1}
+${offset 15}${color2}${top_mem name 2}${color3}${goto 150}${top_mem mem 2}%${alignr}${color1}${top_mem pid 2}
+${offset 15}${color2}${top_mem name 3}${color3}${goto 150}${top_mem mem 3}%${alignr}${color1}${top_mem pid 3}
+${offset 15}${color2}${top_mem name 4}${color3}${goto 150}${top_mem mem 4}%${alignr}${color1}${top_mem pid 4}
+${offset 15}${color2}${top_mem name 5}${color3}${goto 150}${top_mem mem 5}%${alignr}${color1}${top_mem pid 5}
+
+${color1}Top IO
+${color2}${voffset -5}${hr}
+${offset 15}${color2}${top_io name 1}${color3}${goto 150}${top_io io_perc 1}%${alignr}${color1}${top_io pid 1}
+${offset 15}${color2}${top_io name 2}${color3}${goto 150}${top_io io_perc 2}%${alignr}${color1}${top_io pid 2}
+${offset 15}${color2}${top_io name 3}${color3}${goto 150}${top_io io_perc 3}%${alignr}${color1}${top_io pid 3}
+${offset 15}${color2}${top_io name 4}${color3}${goto 150}${top_io io_perc 4}%${alignr}${color1}${top_io pid 4}
+${offset 15}${color2}${top_io name 5}${color3}${goto 150}${top_io io_perc 5}%${alignr}${color1}${top_io pid 5}
+
+${if_existing /proc/net/route wlp3s0}${color1}Wireless Network${color3}${alignr}wlp3s0 (${addr wlp3s0})
+${color2}${voffset -5}${hr}
+${offset 15}${color1}SSID         : ${color3}${wireless_essid wlp3s0} ${color1}${wireless_link_bar wlp3s0}
+${offset 15}${color1}Quality      : ${color3}${wireless_link_qual wlp3s0} / ${wireless_link_qual_max wlp3s0}
+${offset 15}${color1}Bitrate      : ${color3}${wireless_bitrate wlp3s0}
+${offset 15}${color1}Access Point : ${color3}${wireless_ap wlp3s0}
+${offset 15}${color1}Upload       : ${color3}${upspeed wlp3s0}/s${alignr}${totalup wlp3s0}
+${offset 15}${color1}${upspeedgraph wlp3s0 15,285 0066ff a3ceff}
+${offset 15}${color1}Download     : ${color3}${downspeed wlp3s0}/s${alignr}${totaldown wlp3s0}
+${offset 15}${color1}${downspeedgraph wlp3s0 15,285 0066ff a3ceff}$
+${endif}
+${if_existing /proc/net/route enp0s25}${color1}Wired Network${color3}${alignr}enp0s25 (${addr enp0s25})
+${color2}${voffset -5}${hr}
+${offset 15}${color1}Upload     : ${color3}${upspeed enp0s25}/s${alignr}${totalup enp0s25}
+${offset 15}${color1}${upspeedgraph enp0s25 15,285 0066ff a3ceff}
+${offset 15}${color1}Download   : ${color3}${downspeed enp0s25}/s${alignr}${totaldown enp0s25}
+${offset 15}${color1}${downspeedgraph enp0s25 15,285 0066ff a3ceff}$
+${endif}
+${if_existing /proc/net/route tun0}${color1}VPN Network${color3}${alignr}tun0 (${addr tun0})
+${color2}${voffset -5}${hr}
+${offset 15}${color1}Upload     : ${color3}${upspeed tun0}/s${alignr}${totalup tun0}
+${offset 15}${color1}${upspeedgraph tun0 15,285 0066ff a3ceff}
+${offset 15}${color1}Download   : ${color3}${downspeed tun0}/s${alignr}${totaldown tun0}
+${offset 15}${color1}${downspeedgraph tun0 15,285 0066ff a3ceff}
+${endif}
